@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BTCLF NU | Ekushey Quiz 2026</title>
+    <meta name="author" content="Tanjid Shuvro">
+    <meta name="theme-color" content="#2e7d32"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'July';
+            src: url('fonts/july/July-Regular.ttf') format('truetype');
+            font-weight: 400; font-style: normal;
+        }
+
+        :root {
+            --primary: #2e7d32; --primary-dark: #1b5e20; --primary-light: #e8f5e9; 
+            --bg-gradient-start: #e8f5e9; --bg-gradient-end: #c8e6c9;   
+            --text-main: #1a1a1a; --text-muted: #555555; --white: #ffffff;
+            --font-main: 'Hind Siliguri', sans-serif; --font-num: 'July', sans-serif;
+            --shadow-card: 0 10px 30px rgba(0, 50, 0, 0.15); --shadow-box: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --bg-image: url('assets/bg.jpg'); 
+        }
+
+        * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; outline: none; }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            font-family: var(--font-main); height: 100vh; height: 100dvh; width: 100vw;
+            display: flex; justify-content: center; align-items: center; overflow: hidden;
+        }
+
+        #app-container {
+            width: 100%; max-width: 420px; height: 100%; background: rgba(255, 255, 255, 0.95);
+            position: relative; display: flex; flex-direction: column; box-shadow: var(--shadow-card);
+            color: var(--text-main); overflow: hidden;
+        }
+
+        @media (min-width: 450px) {
+            #app-container { height: 90vh; max-height: 850px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.6); }
+        }
+
+        #app-container::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: var(--bg-image); background-size: cover; background-position: center;
+            opacity: 0.05; z-index: 0; pointer-events: none;
+        }
+
+        .screen { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 20px; width: 100%; height: 100%; position: relative; z-index: 2; }
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .home-content-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; gap: 15px; }
+        .logo-wrapper { width: 100px; height: 100px; border-radius: 50%; background: var(--white); border: 4px solid var(--primary-light); display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.08); margin-bottom: 10px; }
+        .logo-img { width: 90%; height: 90%; object-fit: contain; border-radius: 50%; }
+        
+        h1 { font-size: 1.5rem; color: var(--primary); font-weight: 700; text-align: center; line-height: 1.2; }
+        .slogan { color: var(--text-muted); font-weight: 500; font-size: 0.85rem; text-align: center; line-height: 1.3; }
+
+        .countdown-card { background: var(--white); border: 1px solid var(--primary); border-radius: 16px; padding: 20px 15px; width: 100%; box-shadow: var(--shadow-box); text-align: center; }
+        .countdown-header { font-size: 0.85rem; color: var(--text-main); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .timer-grid { display: flex; justify-content: space-around; align-items: baseline; }
+        .timer-segment { width: 50px; display: flex; flex-direction: column; align-items: center; }
+        .timer-val { font-family: var(--font-num); font-size: 2rem; font-weight: 700; color: var(--primary); line-height: 1; }
+        .timer-lbl { font-size: 0.7rem; color: #888; font-weight: 600; margin-top: 4px; }
+        .timer-sep { font-size: 1.5rem; color: #ddd; font-weight: 300; margin-top: -5px; }
+        .event-date { margin-top: 10px; padding-top: 8px; border-top: 1px dashed #eee; font-size: 1.1rem; color: #d32f2f; font-family: var(--font-num); letter-spacing: 0.5px; font-weight: 700; }
+
+        .btn-primary { background: var(--primary); color: var(--white); border: none; padding: 12px 25px; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2); }
+        .btn-outline { background: transparent; border: 1px solid #ddd; padding: 12px 25px; border-radius: 50px; font-size: 1rem; cursor: pointer; }
+        
+        .fb-link { text-decoration: none; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; color: #1877F2; background: var(--white); padding: 8px 20px; border-radius: 50px; border: 1px solid #f0f0f0; margin-bottom: 20px; }
+        .footer-credit { width: 90%; text-align: center; padding: 8px 15px; font-size: 0.7rem; color: #999; font-family: var(--font-num); background: rgba(255,255,255,0.8); border: 1px solid #eee; border-radius: 12px; margin-top: auto; margin-bottom: 10px; }
+        .footer-credit a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+        .input-group { width: 100%; text-align: left; margin-bottom: 12px; }
+        .input-label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 5px; display: block; margin-left: 4px;}
+        .input-box { width: 100%; padding: 12px 15px; font-size: 0.95rem; border: 1px solid #ddd; border-radius: 10px; background: var(--white); }
+
+        .top-bar { padding: 10px 15px; background: rgba(255,255,255,0.95); border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .timer-badge { background: var(--primary-light); color: var(--primary-dark); padding: 4px 10px; border-radius: 15px; font-family: var(--font-num); font-weight: 700; font-size: 1.1rem; }
+        .timer-danger { background: #ffebee; color: #d32f2f; }
+        
+        .quiz-content { flex: 1; width: 100%; overflow-y: auto; padding: 15px; }
+        .question-card { background: var(--white); border: 1px solid #eee; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .q-number { font-family: var(--font-num); color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .q-text { font-family: var(--font-num); font-size: 1.15rem; font-weight: 600; color: var(--text-main); line-height: 1.4; margin-bottom: 20px; }
+
+        .option-btn { width: 100%; padding: 12px 15px; border: 1px solid #eee; border-radius: 8px; background: var(--white); margin-bottom: 8px; font-family: var(--font-num); font-size: 1rem; text-align: left; cursor: pointer; display: flex; align-items: center; }
+        .option-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary-dark); font-weight: 700; }
+        .option-btn::before { content: ''; width: 12px; height: 12px; border: 2px solid #ccc; border-radius: 50%; margin-right: 10px; }
+        .option-btn.selected::before { border-color: var(--primary); background: var(--primary); }
+
+        .bottom-nav { padding: 12px 15px; background: var(--white); border-top: 1px solid #eee; width: 100%; display: flex; justify-content: space-between; gap: 10px; }
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .modal-box {
+            background: #ffffff; width: 85%; max-width: 320px; padding: 30px 25px;
+            border-radius: 20px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .modal-overlay.active .modal-box { transform: scale(1); }
+
+        .modal-actions { display: flex; justify-content: center; gap: 15px; }
+    </style>
+</head>
+<body>
+
+<div id="app-container">
+    <div id="screen-home" class="screen fade-in">
+        <div class="home-content-wrapper">
+            <div class="logo-wrapper">
+                <img src="assets/logo.jpg" alt="BTCLF" class="logo-img">
+            </div>
+            <h1>একুশে কুইজ প্রতিযোগিতা ২০২৬</h1>
+            <p class="slogan">আয়োজক: বাংলাদেশ তরুণ কলাম লেখক ফোরাম<br><strong>জাতীয় বিশ্ববিদ্যালয় শাখা</strong></p>
+            
+            <div id="countdown-area" class="countdown-card">
+                <div class="countdown-header">কুইজ শুরু হতে বাকি</div>
+                <div class="timer-grid">
+                    <div class="timer-segment"><div class="timer-val" id="cd-day">০০</div><div class="timer-lbl">দিন</div></div>
+                    <div class="timer-sep">:</div>
+                    <div class="timer-segment"><div class="timer-val" id="cd-hour">০০</div><div class="timer-lbl">ঘণ্টা</div></div>
+                    <div class="timer-sep">:</div>
+                    <div class="timer-segment"><div class="timer-val" id="cd-min">০০</div><div class="timer-lbl">মি.</div></div>
+                    <div class="timer-sep">:</div>
+                    <div class="timer-segment"><div class="timer-val" id="cd-sec">০০</div><div class="timer-lbl">সে.</div></div>
+                </div>
+                <div class="event-date">২১ ফেব্রুয়ারি ২০২৬, রাত ৯:২১</div>
+            </div>
+
+            <div style="width: 100%; text-align: center;">
+                <div id="start-btn-area" class="hidden" style="margin-bottom: 15px;">
+                    <button class="btn-primary" onclick="app.showLogin()">অংশগ্রহণ করুন</button>
+                </div>
+                <div id="end-msg-area" class="hidden" style="margin-bottom: 15px;">
+                    <h3 style="color: #d32f2f;">সময় শেষ!</h3>
+                    <p style="font-size: 0.85rem; color: #666;">ফলাফল শীঘ্রই পেজে প্রকাশ করা হবে।</p>
+                </div>
+                <a href="https://www.facebook.com/btclf.nu" target="_blank" class="fb-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 17.9895 4.3882 22.954 10.125 23.8542V15.4688H7.07812V12H10.125V9.35625C10.125 6.34875 11.9166 4.6875 14.6576 4.6875C15.9701 4.6875 17.3438 4.92188 17.3438 4.92188V7.875H15.8306C14.34 7.875 13.875 8.8 13.875 9.75V12H17.2031L16.6711 15.4688H13.875V23.8542C19.6118 22.954 24 17.9895 24 12Z" fill="#1877F2"/>
+                    <path d="M16.6711 15.4688L17.2031 12H13.875V9.75C13.875 8.8 14.34 7.875 15.8306 7.875H17.3438V4.92188C17.3438 4.92188 15.9701 4.6875 14.6576 4.6875C11.9166 4.6875 10.125 6.34875 10.125 9.35625V12H7.07812V15.4688H10.125V23.8542C10.7423 23.9511 11.3683 24 12 24C12.6317 24 13.2577 23.9511 13.875 23.8542V15.4688H16.6711Z" fill="white"/>
+                </svg>ফেসবুক            </a>
+            </div>
+        </div>
+        <div class="footer-credit">কারিগরি সহায়তায়: <a href="https://www.facebook.com/t1nj94" target="_blank">তানজিদ শুভ্র</a></div>
+    </div>
+
+    <div id="screen-login" class="screen hidden fade-in" style="justify-content: center;">
+        <div style="width: 100%; max-width: 320px;">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 30px; font-weight: 700;">নিবন্ধন</h2>
+            <div class="input-group">
+                <label class="input-label">আপনার নাম</label>
+                <input type="text" id="inp-name" class="input-box" placeholder="নাম লিখুন">
+            </div>
+            <div class="input-group">
+                <label class="input-label">মোবাইল নম্বর</label>
+                <input type="tel" id="inp-mobile" class="input-box" placeholder="01XXXXXXXXX">
+            </div>
+            <div class="input-group">
+                <label class="input-label">ইমেইল</label>
+                <input type="email" id="inp-email" class="input-box" placeholder="example@mail.com">
+            </div>
+            <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 12px;">
+                <button class="btn-primary" onclick="app.startQuiz()">শুরু করুন</button>
+                <button class="btn-outline" style="border:none; color:#666;" onclick="app.backToHome()">ফিরে যান</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen-quiz" class="hidden" style="display:flex; flex-direction:column; height:100%; width:100%;">
+        <div class="top-bar">
+            <div class="user-info" id="ui-user-name">User</div>
+            <div class="timer-badge" id="ui-timer">০০:০০</div>
+        </div>
+        <div class="quiz-content" id="quiz-body"></div>
+        <div class="bottom-nav">
+            <button class="btn-outline" style="flex:1;" onclick="quiz.prev()">পূর্ববর্তী</button>
+            <button class="btn-primary" style="flex:1;" id="next-submit-btn" onclick="quiz.next()">পরবর্তী</button>
+        </div>
+    </div>
+</div>
+
+<div id="custom-modal" class="modal-overlay hidden">
+    <div class="modal-box">
+        <div style="font-size: 3rem; margin-bottom: 10px;" id="modal-icon">⚠️</div>
+        <h3 id="modal-title" style="margin-bottom: 10px; color: #333; font-size: 1.2rem;">মেসেজ</h3>
+        <p id="modal-msg" style="color: #666; margin-bottom: 25px; font-size: 0.95rem; line-height: 1.5;">...</p>
+        <div class="modal-actions">
+            <button id="btn-modal-cancel" class="btn-outline" onclick="app.closeModal()" style="padding: 10px 20px; font-size: 0.9rem;">না</button>
+            <button id="btn-modal-ok" class="btn-primary" style="padding: 10px 30px; font-size: 0.9rem;">ঠিক আছে</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const CONFIG = {
+    scriptURL: "https://script.google.com/macros/s/AKfycbyfnKdwvNApv43D2GSM7AFWw9mN0xzFJ-o_iQIrbQ8wCqvCeIkG1jvIt2OoxRzJ54s/exec",
+    startDate: new Date(2026, 1, 5, 2, 45, 0).getTime(), 
+    endDate:   new Date(2026, 1, 21, 21, 42, 0).getTime(),
+    hardStop:  new Date(2026, 1, 21, 21, 45, 0).getTime()
+};
+
+let questions = [];
+
+function toBanglaDigit(number) {
+    const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return number.toString().replace(/\d/g, (digit) => banglaDigits[digit]);
+}
+
+const app = {
+    user: { name: "", mobile: "", email: "" },
+    
+    init: function() {
+        setInterval(() => this.checkTime(), 1000);
+        this.checkTime();
+    },
+
+    showAlert: function(msg, icon="⚠️") {
+        const modal = document.getElementById('custom-modal');
+        document.getElementById('modal-icon').innerText = icon;
+        document.getElementById('modal-title').innerText = "লক্ষ্য করুন";
+        document.getElementById('modal-msg').innerText = msg;
+        document.getElementById('btn-modal-cancel').style.display = 'none';
+        
+        const okBtn = document.getElementById('btn-modal-ok');
+        okBtn.innerText = "ঠিক আছে";
+        okBtn.onclick = () => this.closeModal();
+
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.classList.add('active'), 10);
+    },
+
+    askConfirm: function(msg, callback) {
+        const modal = document.getElementById('custom-modal');
+        document.getElementById('modal-icon').innerText = "❓";
+        document.getElementById('modal-title').innerText = "নিশ্চিতকরণ";
+        document.getElementById('modal-msg').innerText = msg;
+        document.getElementById('btn-modal-cancel').style.display = 'inline-block';
+        
+        const okBtn = document.getElementById('btn-modal-ok');
+        okBtn.innerText = "হ্যাঁ";
+        okBtn.onclick = () => {
+            this.closeModal();
+            if(callback) callback();
+        };
+
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.classList.add('active'), 10);
+    },
+
+    closeModal: function() {
+        const modal = document.getElementById('custom-modal');
+        modal.classList.remove('active');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+    },
+
+    checkTime: function() {
+    const now = new Date().getTime();
+    const countdownArea = document.getElementById('countdown-area');
+    const startArea = document.getElementById('start-btn-area');
+    const endMsg = document.getElementById('end-msg-area');
+    const quizScreen = document.getElementById('screen-quiz');
+
+    if (now < CONFIG.startDate) {
+        let dist = CONFIG.startDate - now;
+        document.getElementById('cd-day').innerText = toBanglaDigit(Math.floor(dist / (86400000)).toString().padStart(2, '0'));
+        document.getElementById('cd-hour').innerText = toBanglaDigit(Math.floor((dist % 86400000) / 3600000).toString().padStart(2, '0'));
+        document.getElementById('cd-min').innerText = toBanglaDigit(Math.floor((dist % 3600000) / 60000).toString().padStart(2, '0'));
+        document.getElementById('cd-sec').innerText = toBanglaDigit(Math.floor((dist % 60000) / 1000).toString().padStart(2, '0'));
+    } 
+    else if (now >= CONFIG.startDate && now < CONFIG.endDate) {
+        countdownArea.classList.add('hidden');
+        startArea.classList.remove('hidden');
+        endMsg.classList.add('hidden');
+    } 
+    else if (now >= CONFIG.endDate && now < CONFIG.hardStop) {
+        countdownArea.classList.add('hidden');
+        startArea.classList.add('hidden');
+        if (quizScreen.style.display !== 'flex') {
+            endMsg.classList.remove('hidden');
+        }
+    } 
+    else {
+        countdownArea.classList.add('hidden');
+        startArea.classList.add('hidden');
+        endMsg.classList.remove('hidden');
+        if (quizScreen.style.display === 'flex') {
+            quiz.submit(true); 
+        }
+    }
+},
+
+    showLogin: function() {
+        document.getElementById('screen-home').classList.add('hidden');
+        document.getElementById('screen-login').classList.remove('hidden');
+        document.getElementById('screen-login').style.display = 'flex';
+    },
+
+    backToHome: function() {
+        document.getElementById('screen-login').style.display = 'none';
+        document.getElementById('screen-login').classList.add('hidden');
+        document.getElementById('screen-home').classList.remove('hidden');
+    },
+
+    startQuiz: function() {
+        const n = document.getElementById('inp-name').value.trim();
+        const m = document.getElementById('inp-mobile').value.trim();
+        const e = document.getElementById('inp-email').value.trim();
+
+        if(!n || !m) {
+            this.showAlert("অনুগ্রহ করে আপনার নাম এবং মোবাইল নম্বর দিন।");
+            return;
+        }
+
+        this.user = { name: n, mobile: m, email: e };
+        const btn = document.querySelector('#screen-login .btn-primary');
+        btn.innerText = "প্রশ্ন লোড হচ্ছে...";
+        btn.disabled = true;
+
+        fetch(CONFIG.scriptURL)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    questions = data.data;
+                    document.getElementById('screen-login').style.display = 'none';
+                    document.getElementById('screen-quiz').classList.remove('hidden');
+                    document.getElementById('screen-quiz').style.display = 'flex';
+                    document.getElementById('ui-user-name').innerText = n.split(' ')[0];
+                    quiz.init();
+                } else {
+                    this.showAlert("দুঃখিত, এখন কুইজ দেওয়া যাবে না।");
+                    btn.innerText = "শুরু করুন"; btn.disabled = false;
+                }
+            }).catch(() => {
+                this.showAlert("ইন্টারনেট সমস্যা! আবার চেষ্টা করুন।", "❌");
+                btn.innerText = "শুরু করুন"; btn.disabled = false;
+            });
+    }
+};
+
+const quiz = {
+    currentIdx: 0,
+    answers: [],
+    timerInt: null,
+    isSubmitting: false,
+
+    init: function() {
+        this.answers = new Array(questions.length).fill(null);
+        this.renderQuestion();
+        this.startTimer();
+    },
+
+    renderQuestion: function() {
+        const qData = questions[this.currentIdx];
+        const container = document.getElementById('quiz-body');
+        const btn = document.getElementById('next-submit-btn');
+
+        container.innerHTML = `
+            <div class="question-card fade-in">
+                <div class="q-number">প্রশ্ন ${toBanglaDigit(this.currentIdx + 1)} / ${toBanglaDigit(questions.length)}</div>
+                <div class="q-text">${qData.q}</div>
+                <div>
+                    ${qData.opts.map(opt => `
+                        <div class="option-btn ${this.answers[this.currentIdx] === opt ? 'selected' : ''}" 
+                             onclick="quiz.selectOption('${opt}')">${opt}</div>
+                    `).join('')}
+                </div>
+            </div>`;
+
+        if (this.currentIdx === questions.length - 1) {
+            btn.innerText = "জমা দিন";
+            btn.onclick = () => this.trySubmit();
+        } else {
+            btn.innerText = "পরবর্তী";
+            btn.onclick = () => this.next();
+        }
+    },
+
+    selectOption: function(val) {
+        this.answers[this.currentIdx] = val;
+        this.renderQuestion();
+    },
+
+    prev: function() { if(this.currentIdx > 0) { this.currentIdx--; this.renderQuestion(); } },
+    next: function() { if(this.currentIdx < questions.length - 1) { this.currentIdx++; this.renderQuestion(); } },
+
+    startTimer: function() {
+        const timerEl = document.getElementById('ui-timer');
+        this.timerInt = setInterval(() => {
+            const dist = CONFIG.endDate - new Date().getTime();
+            if(dist <= 0) { this.submit(true); return; }
+            let m = Math.floor((dist % 3600000) / 60000);
+            let s = Math.floor((dist % 60000) / 1000);
+            timerEl.innerText = `${toBanglaDigit(m.toString().padStart(2, '0'))}:${toBanglaDigit(s.toString().padStart(2, '0'))}`;
+            if(dist < 60000) timerEl.classList.add('timer-danger');
+        }, 1000);
+    },
+
+    trySubmit: function() {
+        const filled = this.answers.filter(a => a !== null).length;
+        let msg = (filled < questions.length) 
+            ? `আপনি ${toBanglaDigit(filled)}টি উত্তর দিয়েছেন। বাকিগুলো ফাঁকা রেখে জমা দিবেন?` 
+            : "আপনি কি নিশ্চিত যে উত্তর জমা দিবেন?";
+        app.askConfirm(msg, () => this.submit(false));
+    },
+
+    submit: function(isAuto) {
+        if(this.isSubmitting) return;
+        this.isSubmitting = true;
+        clearInterval(this.timerInt);
+        
+        document.getElementById('quiz-body').innerHTML = `<div style="text-align:center; padding:50px 20px;"><h2 style="color:var(--primary)">জমা হচ্ছে...</h2></div>`;
+
+        fetch(CONFIG.scriptURL, {
+            method: 'POST', mode: 'no-cors',
+            body: JSON.stringify({ name: app.user.name, mobile: app.user.mobile, email: app.user.email, answers: this.answers })
+        }).then(() => this.showSuccess())
+          .catch(() => {
+              if(isAuto) this.showSuccess();
+              else {
+                  app.askConfirm("নেটওয়ার্ক সমস্যা! আবার চেষ্টা করবেন?", () => { this.isSubmitting = false; this.submit(false); });
+              }
+          });
+    },
+
+    showSuccess: function() {
+        document.getElementById('screen-quiz').innerHTML = `
+            <div style="padding:40px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%;">
+                <div style="font-size:4rem; color:var(--primary);">✔</div>
+                <h2>ধন্যবাদ!</h2>
+                <p style="color:#666; margin-bottom:30px;">উত্তর সফলভাবে জমা হয়েছে।</p>
+                <a href="https://www.facebook.com/btclf.nu" class="btn-primary" style="text-decoration:none;">পেজে ফিরে যান</a>
+            </div>`;
+    }
+};
+
+app.init();
+</script>
+
+</body>
+</html>
